@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicahB.com | System Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar to match the dark theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0c0d; }
+        ::-webkit-scrollbar-thumb { background: #1a1c1e; border: 1px solid #333; }
+        ::-webkit-scrollbar-thumb:hover { background: #24272b; }
+    </style>
+</head>
+<body class="bg-[#0b0c0d] text-zinc-300 font-sans selection:bg-cyan-900 selection:text-cyan-200 antialiased">
+    
+    <div class="fixed inset-0 pointer-events-none opacity-[0.03] z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
+
+    <div class="min-h-screen relative flex flex-col">
+        
+        <header class="max-w-6xl w-full mx-auto pt-8 px-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-black italic tracking-tighter text-zinc-500 uppercase leading-none">
+                        <span class="text-cyan-500 text-4xl underline decoration-cyan-900">MicahB</span>.com 
+                    </h1>
+                    <span class="text-[10px] not-italic font-bold tracking-[0.2em] text-zinc-600 uppercase mt-2 block">v2.0 Revision - Est. 2025</span>
+                </div>
+
+                <div class="flex items-center space-x-2 self-start">
+                    <div class="hidden sm:flex items-center bg-cyan-950/30 border border-cyan-900 px-2 py-1 rounded-sm">
+                        <span class="text-[14px] mr-1.5 text-cyan-500">🔒</span>
+                        <span class="text-[8px] font-black text-cyan-600 uppercase tracking-tighter">Secure_SSL</span>
+                    </div>
+
+                    <div class="flex items-center bg-[#1a1c1e] border border-zinc-800 p-2 pr-4 shadow-lg">
+                        <div class="w-6 h-6 bg-black border border-zinc-700 flex items-center justify-center mr-3">
+                            <div id="status-led" class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] transition-all duration-75"></div>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[8px] text-zinc-500 uppercase leading-none">System Status</span>
+                            <span id="status-text" class="text-[10px] font-bold text-emerald-400 uppercase tracking-tighter">Online / Stable</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="mt-6 flex items-center space-x-2 text-xs font-bold uppercase tracking-widest text-zinc-500 border-b border-zinc-900 pb-2">
+                <a href="index.html" class="text-cyan-600 underline decoration-cyan-900 underline-offset-4 cursor-default">Portal</a>
+                <span>/</span>
+                <a href="archives.html" class="hover:text-zinc-300 transition-colors">Archives</a>
+            </nav>
+        </header>
+
+        <main class="max-w-6xl w-full mx-auto py-8 px-4 space-y-8 flex-grow">
+
+            <section class="bg-[#1a1c1e] border-2 border-t-zinc-800 border-l-zinc-800 border-b-black border-r-black p-1 shadow-2xl">
+                <div class="bg-gradient-to-r from-zinc-800 via-zinc-800 to-transparent px-3 py-1 border border-black mb-1 flex justify-between items-center">
+                    <span class="text-[10px] font-bold uppercase text-zinc-400 tracking-widest italic">one.log</span>
+                    <span class="text-[9px] text-zinc-600 font-mono">0.1.A</span>
+                </div>
+
+                <div class="flex flex-col md:flex-row border border-black bg-[#16181a]">
+                    
+                    <aside class="w-full md:w-48 bg-[#1c1f21] p-6 border-b md:border-b-0 md:border-r border-black flex flex-col items-center">
+                        <div class="w-24 h-24 bg-black border border-zinc-800 flex items-center justify-center mb-4 shadow-inner">
+                            <span class="text-[9px] text-zinc-700 uppercase font-bold tracking-tighter">No_Image</span>
+                        </div>
+                        
+                        <div class="text-center w-full">
+                            <p class="text-cyan-600 font-bold text-sm uppercase tracking-tighter">MicahB</p>
+                            <p class="text-[9px] text-zinc-600 uppercase font-bold">Author / Dev</p>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-zinc-800 w-full text-[10px] text-zinc-500 space-y-2 font-mono">
+                            <p>Status: <span class="text-emerald-600">Active</span></p>
+                            <p>Loc: New Zealand</p>
+                        </div>
+                    </aside>
+
+                    <article class="flex-grow p-6 md:p-10 bg-[#16181a]">
+                        <div class="max-w-none">
+                            <h2 class="text-zinc-100 font-bold text-xl mb-6 uppercase tracking-tight flex items-center">
+                                <span class="w-2 h-4 bg-cyan-600 mr-3 inline-block"></span>
+                                About me + Book recommendations
+                            </h2>
+                            
+                            <div class="text-zinc-400 leading-relaxed italic space-y-4 font-serif text-lg">
+                                <p>
+                                    I'm a teen author, poet, and musician. I love coding, chess, and minecraft. Top three good books/series I've read recently were:
+                                </p>
+                                <ul class="list-disc list-inside space-y-3 pl-4 border-l border-zinc-800 mt-4 not-italic font-sans text-base text-zinc-500">
+                                    <li><strong class="text-zinc-300">The Merciful Crow</strong> by Margaret Owen. A good story would recommend.</li>
+                                    <li><strong class="text-zinc-300">Brandon Sanderson's Cosmere</strong>. If you haven't already read this, you need to. It's a lot of books, but it's all amazing and worth reading.</li>
+                                    <li><strong class="text-zinc-300">The Prison Healer</strong> by Lynette Noni. This trilogy is a great read, although there was quite a bit of romance in the second book, which isn't my favorite. Still, I would definitely recommend.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-1 shadow-lg">
+                <div class="bg-[#1a1c1e] border border-zinc-800 p-3 text-[10px] uppercase font-bold text-zinc-500">
+                    <p>Network: <span class="text-emerald-500">Online</span> | Users: <span class="text-zinc-300">1</span></p>
+                </div>
+                <div class="bg-[#1a1c1e] border border-zinc-800 p-3 text-[10px] uppercase font-bold text-zinc-500 text-center font-mono">
+                    <span id="server-time" class="text-zinc-300 text-[11px]">0000-00-00 00:00:00</span>
+                </div>
+                <div class="bg-[#1a1c1e] border border-zinc-800 p-3 text-[10px] uppercase font-bold text-zinc-500 text-right">
+                    <p>Node: <span class="text-zinc-300">Alpha_0.1</span></p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="max-w-6xl w-full mx-auto py-12 px-4 text-center">
+            <div class="h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent w-full mb-8"></div>
+            
+            <div class="flex justify-center mb-6 space-x-2">
+                <div class="px-2 py-1 bg-black border border-zinc-700 text-[9px] font-mono text-cyan-500 uppercase tracking-tighter shadow-inner">
+                    Tailwind_v3.4
+                </div>
+                <div class="px-2 py-1 bg-zinc-900 border border-zinc-700 text-[9px] font-mono text-emerald-500 uppercase tracking-tighter">
+                    HTML5_Ready
+                </div>
+                <div class="px-2 py-1 bg-black border border-zinc-700 text-[9px] font-mono text-zinc-500 uppercase tracking-tighter">
+                    Encrypted_SSL
+                </div>
+            </div>
+
+            <p class="text-[10px] text-zinc-600 uppercase tracking-[0.4em] font-bold">
+                Micahb.com &copy; 2025
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        const led = document.getElementById('status-led');
+        const timeElement = document.getElementById('server-time');
+
+        function updateUI() {
+            const now = new Date();
+            const format = (n) => String(n).padStart(2, '0');
+            const timeString = `${now.getFullYear()}-${format(now.getMonth() + 1)}-${format(now.getDate())} ${format(now.getHours())}:${format(now.getMinutes())}:${format(now.getSeconds())}`;
+            timeElement.textContent = timeString;
+        }
+
+        function startFlicker() {
+            if (Math.random() > 0.98) {
+                led.classList.add('opacity-40');
+                setTimeout(() => led.classList.remove('opacity-40'), 50 + Math.random() * 50);
+            }
+            setTimeout(startFlicker, 100 + Math.random() * 200);
+        }
+
+        setInterval(updateUI, 1000); 
+        updateUI(); 
+        startFlicker();
+    </script>
+</body>
+</html>
