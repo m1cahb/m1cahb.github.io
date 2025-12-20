@@ -172,5 +172,77 @@
         updateUI(); 
         startFlicker();
     </script>
+     <div id="holiday-logic" class="hidden fixed bottom-4 right-4 z-[100]">
+    <div id="holiday-window" class="bg-[#1a1c1e] border-2 border-t-zinc-800 border-l-zinc-800 border-b-black border-r-black p-1 shadow-[0_0_20px_rgba(6,182,212,0.2)] max-w-[180px]">
+        <div class="bg-cyan-950/40 px-2 py-1 border border-black flex justify-between items-center mb-1">
+            <span id="holiday-status" class="text-[8px] font-black uppercase text-cyan-400 tracking-tighter">Subroutine_Dec</span>
+            <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></div>
+        </div>
+        
+        <div class="bg-black border border-zinc-900 p-3 flex flex-col items-center">
+            <pre id="holiday-icon" class="text-emerald-600 text-[10px] leading-none mb-2 font-mono">
+   ^
+  / \
+ /   \
+/_____\
+   |
+            </pre>
+            <p id="holiday-msg" class="text-[9px] text-zinc-500 font-mono text-center uppercase leading-tight">
+                Seasonal_Subroutine_Active
+            </p>
+        </div>
+        
+        <div class="bg-[#16181a] p-1 border-t border-black text-[7px] text-zinc-700 uppercase tracking-widest text-center">
+            Node: XMAS
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom animation for a one-time double bounce */
+    .initial-bounce {
+        animation: welcome-bounce 1.2s ease-out forwards;
+    }
+
+    @keyframes welcome-bounce {
+        0% { transform: translateY(100px); opacity: 0; }
+        40% { transform: translateY(-20px); opacity: 1; }
+        60% { transform: translateY(5px); }
+        80% { transform: translateY(-5px); }
+        100% { transform: translateY(0); }
+    }
+</style>
+
+<script>
+    function runHolidayCheck() {
+        const now = new Date();
+        const month = now.getMonth(); 
+        const day = now.getDate();
+        
+        const container = document.getElementById('holiday-logic');
+        const holidayWindow = document.getElementById('holiday-window');
+        const statusText = document.getElementById('holiday-status');
+        const msgText = document.getElementById('holiday-msg');
+        const treeIcon = document.getElementById('holiday-icon');
+
+        // Show only in December (Month 11)
+        if (month === 11) {
+            container.classList.remove('hidden');
+            // Trigger the one-time bounce
+            holidayWindow.classList.add('initial-bounce');
+
+            if (day === 25) {
+                statusText.textContent = "Protocol: CR1ST-M4S";
+                statusText.classList.replace('text-cyan-400', 'text-emerald-400');
+                msgText.textContent = "Merry Christmas, Micah.";
+                msgText.classList.replace('text-zinc-500', 'text-emerald-500');
+                treeIcon.classList.replace('text-emerald-600', 'text-cyan-400');
+                treeIcon.innerHTML = `   <span class="animate-ping text-white inline-block">*</span>\n  / \\\n /   \\\n/_____\\\n   |`;
+            }
+        }
+    }
+
+    runHolidayCheck();
+</script>
 </body>
 </html>
