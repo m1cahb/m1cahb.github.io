@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%2306b6d4%22>M</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MicahB.com | Reader</title>
@@ -8,32 +9,58 @@
     <style>
         .dark-embed { filter: invert(0.9) hue-rotate(180deg); }
         #content-frame { width: 100%; height: 100%; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0c0d; }
+        ::-webkit-scrollbar-thumb { background: #1a1c1e; border: 1px solid #333; }
     </style>
 </head>
-<body class="bg-[#0b0c0d] text-zinc-300 overflow-hidden flex flex-col h-screen">
+<body class="bg-[#0b0c0d] text-zinc-300 font-sans antialiased overflow-hidden flex flex-col h-screen">
     
-    <header class="bg-[#1a1c1e] border-b border-black p-4 flex justify-between items-center shadow-md">
-        <a href="/writing" class="text-[10px] font-bold text-cyan-600 hover:text-cyan-400 uppercase tracking-widest transition-colors">
-            &larr; Exit_Viewer
-        </a>
-        <div class="text-[10px] font-mono text-zinc-500 uppercase">
-            File_ID: <span id="file-id-display" class="text-emerald-500">None</span>
+    <header class="bg-[#1a1c1e] border-b border-black p-4 shadow-md z-20">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="relative w-8 h-8 group">
+                    <div class="absolute inset-0 border border-cyan-900/50 rotate-45 group-hover:rotate-90 transition-transform duration-500"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <svg viewBox="0 0 24 24" class="w-4 h-4 fill-none stroke-cyan-500 stroke-[1.5]">
+                            <polyline points="4 20 4 4 12 12 20 4 20 20"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <a href="/writing" class="text-[10px] font-bold text-zinc-500 hover:text-cyan-400 uppercase tracking-widest transition-colors">
+                    &larr; Exit_Viewer
+                </a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:block text-[9px] font-mono text-zinc-600 uppercase">
+                    Status: <span class="text-emerald-500 italic">Streaming_Data</span>
+                </div>
+                <div class="text-[10px] font-mono text-zinc-400 uppercase bg-black px-2 py-1 border border-zinc-800">
+                    File: <span id="file-id-display" class="text-cyan-500">None</span>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="flex-grow bg-[#0b0c0d] p-4 md:p-8 flex justify-center">
-        <div class="w-full max-w-4xl h-full bg-black border border-zinc-900 relative overflow-hidden shadow-2xl">
+    <main class="flex-grow bg-[#0b0c0d] p-2 md:p-6 flex justify-center overflow-hidden">
+        <div class="w-full max-w-5xl h-full bg-black border border-zinc-900 relative overflow-hidden shadow-2xl flex flex-col">
             
-            <div class="absolute top-0 left-0 w-full h-8 bg-[#1a1c1e] z-10 border-b border-black flex items-center px-4">
+            <div class="w-full h-8 bg-[#1a1c1e] border-b border-black flex items-center px-4 justify-between shrink-0">
                 <div class="flex space-x-1.5 text-zinc-700">
-                    <div class="w-2 h-2 bg-current rounded-full"></div>
-                    <div class="w-2 h-2 bg-current rounded-full"></div>
-                    <div class="w-2 h-2 bg-current rounded-full"></div>
+                    <div class="w-2 h-2 bg-red-900/50 rounded-full"></div>
+                    <div class="w-2 h-2 bg-zinc-800 rounded-full"></div>
+                    <div class="w-2 h-2 bg-zinc-800 rounded-full"></div>
                 </div>
-                <div class="mx-auto text-[8px] font-mono text-zinc-600 uppercase tracking-[0.3em]">Document_Stream</div>
+                <div class="text-[8px] font-mono text-zinc-500 uppercase tracking-[0.3em]">Secure_Document_Buffer</div>
+                <div id="mini-clock" class="text-[8px] font-mono text-zinc-600 hidden sm:block">00-00-0000</div>
             </div>
 
-            <iframe id="content-frame" src="about:blank" class="border-none dark-embed pt-8"></iframe>
+            <div class="flex-grow relative">
+                <iframe id="content-frame" src="about:blank" class="border-none dark-embed"></iframe>
+                
+                <div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
+            </div>
             
         </div>
     </main>
@@ -51,8 +78,18 @@
             document.getElementById('content-frame').src = fullLink;
             document.getElementById('file-id-display').textContent = storyKey.toUpperCase();
         } else {
-            document.getElementById('file-id-display').textContent = "ERROR: FILE NOT FOUND";
+            document.getElementById('file-id-display').textContent = "ERR: NULL_PTR";
+            document.getElementById('file-id-display').classList.replace('text-cyan-500', 'text-red-500');
         }
+
+        function updateClock() {
+            const now = new Date();
+            const format = (n) => String(n).padStart(2, '0');
+            const timeString = `${format(now.getDate())}-${format(now.getMonth() + 1)}-${now.getFullYear()} ${format(now.getHours())}:${format(now.getMinutes())}`;
+            document.getElementById('mini-clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
 </body>
 </html>
