@@ -119,7 +119,10 @@
     </footer>
 
    <script>
-        const storyDatabase = { 'time': '1xjamoJJmX9jfSNG-kgBDNr6oH3xgR5Fu068sbgqtXZM' };
+        const storyDatabase = { 
+            'time': '1xjamoJJmX9jfSNG-kgBDNr6oH3xgR5Fu068sbgqtXZM' 
+        };
+
         const urlParams = new URLSearchParams(window.location.search);
         const storyKey = urlParams.get('story');
 
@@ -128,15 +131,15 @@
             document.getElementById('content-frame').src = fullLink;
             document.getElementById('file-id-display').textContent = storyKey.toUpperCase();
         } else {
-            document.getElementById('file-id-display').textContent = "ERR: NULL_PTR";
-            document.getElementById('file-id-display').classList.replace('text-cyan-500', 'text-red-500');
+            window.location.replace("/404");
         }
 
         function updateClock() {
             const now = new Date();
             const format = (n) => String(n).padStart(2, '0');
             const timeString = `${format(now.getDate())}-${format(now.getMonth() + 1)}-${now.getFullYear()} ${format(now.getHours())}:${format(now.getMinutes())}`;
-            document.getElementById('mini-clock').textContent = timeString;
+            const clockDisplay = document.getElementById('mini-clock');
+            if (clockDisplay) clockDisplay.textContent = timeString;
         }
 
         function runHolidayCheck() {
