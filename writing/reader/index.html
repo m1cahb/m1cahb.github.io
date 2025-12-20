@@ -12,6 +12,19 @@
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0b0c0d; }
         ::-webkit-scrollbar-thumb { background: #1a1c1e; border: 1px solid #333; }
+        
+        /* Custom animation for a one-time double bounce */
+        .initial-bounce {
+            animation: welcome-bounce 1.2s ease-out forwards;
+        }
+
+        @keyframes welcome-bounce {
+            0% { transform: translateY(100px); opacity: 0; }
+            40% { transform: translateY(-20px); opacity: 1; }
+            60% { transform: translateY(5px); }
+            80% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-[#0b0c0d] text-zinc-300 font-sans antialiased overflow-hidden flex flex-col h-screen">
@@ -28,7 +41,7 @@
                     </div>
                 </div>
                 <a href="/writing" class="text-[10px] font-bold text-zinc-500 hover:text-cyan-400 uppercase tracking-widest transition-colors">
-                    &larr; Exit_Viewer
+                    ← Exit_Viewer
                 </a>
             </div>
 
@@ -43,7 +56,7 @@
         </div>
     </header>
 
-    <main class="flex-grow bg-[#0b0c0d] p-2 md:p-6 flex justify-center overflow-hidden">
+    <main class="flex-grow bg-[#0b0c0d] p-2 md:p-6 flex justify-center overflow-hidden relative">
         <div class="w-full max-w-5xl h-full bg-black border border-zinc-900 relative overflow-hidden shadow-2xl flex flex-col">
             
             <div class="w-full h-8 bg-[#1a1c1e] border-b border-black flex items-center px-4 justify-between shrink-0">
@@ -58,25 +71,42 @@
 
             <div class="flex-grow relative">
                 <iframe id="content-frame" src="about:blank" class="border-none dark-embed"></iframe>
-                
                 <div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
             </div>
-            
+        </div>
+
+        <div id="holiday-logic" class="hidden absolute bottom-10 right-10 z-[100]">
+            <div id="holiday-window" class="bg-[#1a1c1e] border-2 border-t-zinc-800 border-l-zinc-800 border-b-black border-r-black p-1 shadow-[0_0_20px_rgba(6,182,212,0.2)] max-w-[180px] relative">
+                <button onclick="document.getElementById('holiday-logic').remove()" class="absolute -top-2 -right-2 w-5 h-5 bg-red-900 border border-black text-[10px] text-white font-bold hover:bg-red-600 flex items-center justify-center shadow-lg z-10">×</button>
+                <div class="bg-cyan-950/40 px-2 py-1 border border-black flex justify-between items-center mb-1">
+                    <span id="holiday-status" class="text-[8px] font-black uppercase text-cyan-400 tracking-tighter">Subroutine_Dec</span>
+                    <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></div>
+                </div>
+                <div class="bg-black border border-zinc-900 p-3 flex flex-col items-center">
+                    <pre id="holiday-icon" class="text-emerald-600 text-[10px] leading-none mb-2 font-mono">
+   ^
+  / \
+ /   \
+/_____\
+   |
+                    </pre>
+                    <p id="holiday-msg" class="text-[9px] text-zinc-500 font-mono text-center uppercase leading-tight">Seasonal_Subroutine_Active</p>
+                </div>
+                <div class="bg-[#16181a] p-1 border-t border-black text-[7px] text-zinc-700 uppercase tracking-widest text-center">Node: XMAS_2025</div>
+            </div>
         </div>
     </main>
 
-    <footer class="max-w-6xl w-full mx-auto py-12 px-4 text-center">
-            <div class="h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent w-full mb-8"></div>
-            
-            <div class="flex flex-wrap justify-center gap-4 mb-8 font-sans">
-                <a href="https://open.spotify.com/user/M1cah-brown" target="_blank" class="flex items-center bg-black border border-zinc-800 p-2 hover:border-emerald-500 transition-all group">
+    <footer class="max-w-6xl w-full mx-auto py-8 px-4 text-center shrink-0">
+            <div class="h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent w-full mb-4"></div>
+            <div class="flex flex-wrap justify-center gap-4 mb-4 font-sans">
+                <a href="http://googleusercontent.com/spotify.com/3" target="_blank" class="flex items-center bg-black border border-zinc-800 p-2 hover:border-emerald-500 transition-all group">
                     <span class="text-emerald-500 mr-2 text-sm">🎵</span>
                     <div class="text-left">
                         <p class="text-[8px] text-zinc-600 uppercase leading-none">Spotify_Link</p>
                         <p class="text-[10px] text-zinc-400 group-hover:text-emerald-400 font-mono italic">My music taste</p>
                     </div>
                 </a>
-
                 <a href="https://www.chess.com/member/M1cah-brown" target="_blank" class="flex items-center bg-black border border-zinc-800 p-2 hover:border-zinc-100 transition-all group">
                     <span class="text-zinc-400 mr-2 text-sm">♟</span>
                     <div class="text-left">
@@ -85,29 +115,11 @@
                     </div>
                 </a>
             </div>
-
-            <div class="flex justify-center mb-6 space-x-2">
-                <div class="px-2 py-1 bg-black border border-zinc-700 text-[9px] font-mono text-cyan-500 uppercase tracking-tighter shadow-inner">
-                    Tailwind_v3.4
-                </div>
-                <div class="px-2 py-1 bg-zinc-900 border border-zinc-700 text-[9px] font-mono text-emerald-500 uppercase tracking-tighter">
-                    HTML5_Ready
-                </div>
-                <div class="px-2 py-1 bg-black border border-zinc-700 text-[9px] font-mono text-zinc-500 uppercase tracking-tighter">
-                    Encrypted_SSL
-                </div>
-            </div>
-
-            <p class="text-[10px] text-zinc-600 uppercase tracking-[0.4em] font-bold">
-                Micahb.com © 2025
-            </p>
-        </footer>
+            <p class="text-[10px] text-zinc-600 uppercase tracking-[0.4em] font-bold">Micahb.com © 2025</p>
+    </footer>
 
    <script>
-        const storyDatabase = {
-            'time': '1xjamoJJmX9jfSNG-kgBDNr6oH3xgR5Fu068sbgqtXZM',
-        };
-
+        const storyDatabase = { 'time': '1xjamoJJmX9jfSNG-kgBDNr6oH3xgR5Fu068sbgqtXZM' };
         const urlParams = new URLSearchParams(window.location.search);
         const storyKey = urlParams.get('story');
 
@@ -126,8 +138,29 @@
             const timeString = `${format(now.getDate())}-${format(now.getMonth() + 1)}-${now.getFullYear()} ${format(now.getHours())}:${format(now.getMinutes())}`;
             document.getElementById('mini-clock').textContent = timeString;
         }
+
+        function runHolidayCheck() {
+            const now = new Date();
+            const month = now.getMonth(); 
+            const day = now.getDate();
+            const container = document.getElementById('holiday-logic');
+            const holidayWindow = document.getElementById('holiday-window');
+            if (month === 11) {
+                container.classList.remove('hidden');
+                holidayWindow.classList.add('initial-bounce');
+                if (day === 25) {
+                    document.getElementById('holiday-status').textContent = "Protocol: CR1ST-M4S";
+                    document.getElementById('holiday-status').classList.replace('text-cyan-400', 'text-emerald-400');
+                    document.getElementById('holiday-msg').textContent = "Merry Christmas, Micah.";
+                    document.getElementById('holiday-msg').classList.replace('text-zinc-500', 'text-emerald-500');
+                    document.getElementById('holiday-icon').innerHTML = `   <span class="animate-ping text-white inline-block">*</span>\n  / \\\n /   \\\n/_____\\\n   |`;
+                }
+            }
+        }
+
         setInterval(updateClock, 1000);
         updateClock();
+        runHolidayCheck();
     </script>
 </body>
 </html>

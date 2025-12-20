@@ -172,8 +172,13 @@
         updateUI(); 
         startFlicker();
     </script>
-     <div id="holiday-logic" class="hidden fixed bottom-4 right-4 z-[100]">
-    <div id="holiday-window" class="bg-[#1a1c1e] border-2 border-t-zinc-800 border-l-zinc-800 border-b-black border-r-black p-1 shadow-[0_0_20px_rgba(6,182,212,0.2)] max-w-[180px]">
+<div id="holiday-logic" class="hidden fixed bottom-4 right-4 z-[100]">
+    <div id="holiday-window" class="bg-[#1a1c1e] border-2 border-t-zinc-800 border-l-zinc-800 border-b-black border-r-black p-1 shadow-[0_0_20px_rgba(6,182,212,0.2)] max-w-[180px] relative">
+        
+        <button onclick="document.getElementById('holiday-logic').remove()" class="absolute -top-2 -right-2 w-5 h-5 bg-red-900 border border-black text-[10px] text-white font-bold hover:bg-red-600 flex items-center justify-center shadow-lg z-10">
+            ×
+        </button>
+
         <div class="bg-cyan-950/40 px-2 py-1 border border-black flex justify-between items-center mb-1">
             <span id="holiday-status" class="text-[8px] font-black uppercase text-cyan-400 tracking-tighter">Subroutine_Dec</span>
             <div class="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse"></div>
