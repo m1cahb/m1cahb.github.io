@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicahB | Establishing Connection...</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-cyan {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .animate-pulse-cyan { animation: pulse-cyan 1.5s infinite; }
+        
+        .loading-bar-fill {
+            width: 0%;
+            animation: progress 3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        @keyframes progress {
+            0% { width: 0%; }
+            30% { width: 45%; }
+            60% { width: 48%; }
+            100% { width: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-[#0b0c0d] text-cyan-500 font-mono min-h-screen flex items-center justify-center p-6 overflow-hidden">
+
+    <div class="fixed inset-0 pointer-events-none opacity-5 z-50 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
+
+    <div class="max-w-md w-full space-y-8 relative">
+        <div class="text-center space-y-2">
+            <div class="inline-block px-3 py-1 border border-cyan-900 bg-cyan-950/20 text-[10px] uppercase tracking-[0.3em] font-black">
+                External_Node_Detected
+            </div>
+            <h1 class="text-2xl font-black italic tracking-tighter uppercase text-zinc-400">
+                Bridge <span class="text-cyan-500">Protocol</span>
+            </h1>
+        </div>
+
+        <div class="bg-[#1a1c1e] border-2 border-t-zinc-800 border-l-zinc-800 border-b-black border-r-black p-6 shadow-2xl relative overflow-hidden">
+            <div class="flex justify-between items-center mb-8 relative z-10">
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-10 h-10 border border-cyan-500 flex items-center justify-center bg-black">
+                        <span class="text-xs">MB</span>
+                    </div>
+                    <span class="text-[8px] uppercase font-bold text-zinc-600">Local_Host</span>
+                </div>
+
+                <div class="flex-grow px-4">
+                    <div class="h-px bg-cyan-900 relative">
+                        <div class="absolute -top-1 left-0 w-2 h-2 bg-cyan-500 rounded-full animate-ping"></div>
+                        <div class="absolute -top-1 right-0 w-2 h-2 bg-cyan-500 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center gap-2">
+                    <div class="w-10 h-10 border border-emerald-500 flex items-center justify-center bg-black animate-pulse">
+                        <span class="text-xs text-emerald-500">???</span>
+                    </div>
+                    <span class="text-[8px] uppercase font-bold text-zinc-600">Remote_Node</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 font-mono text-[11px]">
+                <div class="flex justify-between">
+                    <span class="text-zinc-600 uppercase">Handshake:</span>
+                    <span id="step-1" class="text-zinc-400 italic">Pending...</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-zinc-600 uppercase">Buffer:</span>
+                    <span id="step-2" class="text-zinc-400 italic">Waiting...</span>
+                </div>
+                
+                <div class="w-full h-1 bg-black border border-zinc-800 mt-4">
+                    <div class="loading-bar-fill h-full bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.6)]"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="action-container" class="opacity-0 transition-opacity duration-1000 text-center">
+            <p class="text-[10px] text-zinc-600 uppercase mb-4 tracking-widest animate-pulse-cyan">
+                Connection_Established_Successfully
+            </p>
+            <a href="/" class="inline-block w-full py-4 bg-cyan-600 text-black font-black uppercase tracking-tighter hover:bg-white hover:scale-[1.02] transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+                [ Execute_Handover ]
+            </a>
+            <div class="mt-4">
+                <a href="/" class="text-[9px] text-zinc-700 hover:text-red-900 uppercase underline tracking-widest">Abort_Connection</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('step-1').textContent = "ACCEPTED";
+            document.getElementById('step-1').classList.replace('text-zinc-400', 'text-cyan-500');
+        }, 800);
+
+        setTimeout(() => {
+            document.getElementById('step-2').textContent = "SYNCHRONIZED";
+            document.getElementById('step-2').classList.replace('text-zinc-400', 'text-emerald-500');
+        }, 1800);
+
+        setTimeout(() => {
+            document.getElementById('action-container').classList.remove('opacity-0');
+        }, 3000);
+    </script>
+</body>
+</html>
